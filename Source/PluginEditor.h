@@ -110,7 +110,7 @@ struct AnalyzerPathGenerator
     {
         auto top = fftBounds.getY();
         auto bottom = fftBounds.getHeight();
-        auto width = fftBounds.getWidth();
+        auto width = fftBounds.getWidth() - 8.f;
 
         int numBins = (int)fftSize / 2;
 

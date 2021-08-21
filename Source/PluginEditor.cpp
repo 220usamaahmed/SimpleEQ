@@ -394,20 +394,20 @@ void ResponseCurveComponent::paint(juce::Graphics& g)
     if (shouldShowFFTAnalysis)
     {
         auto leftChannelFFTPath = leftPathProducer.getPath();
-        leftChannelFFTPath.applyTransform(AffineTransform().translation(responseArea.getX(), responseArea.getY()));
+        leftChannelFFTPath.applyTransform(AffineTransform().translation(responseArea.getX(), responseArea.getY() - 10.f));
 
-        g.setColour(Colours::skyblue);
+        g.setColour(Colour(97u, 18u, 167u)); //purple-
         g.strokePath(leftChannelFFTPath, PathStrokeType(1.f));
 
         auto rightChannelFFTPath = rightPathProducer.getPath();
-        rightChannelFFTPath.applyTransform(AffineTransform().translation(responseArea.getX(), responseArea.getY()));
+        rightChannelFFTPath.applyTransform(AffineTransform().translation(responseArea.getX(), responseArea.getY() - 10.f));
 
-        g.setColour(Colours::lightyellow);
+        g.setColour(Colour(215u, 201u, 134u));
         g.strokePath(rightChannelFFTPath, PathStrokeType(1.f));
     }
 
-    g.setColour(Colours::orange);
-    g.drawRoundedRectangle(getRenderArea().toFloat(), 4.f, 1.f);
+    g.setColour(Colours::darkgrey);
+    g.drawRoundedRectangle(getRenderArea().toFloat(), 0.f, 1.f);
 
     g.setColour(Colours::white);
     g.strokePath(responseCurve, PathStrokeType(2.f));
@@ -508,7 +508,7 @@ void ResponseCurveComponent::resized()
 
         Rectangle<int> r;
         r.setSize(textWidth, fontHeight);
-        r.setX(getWidth() - textWidth);
+        r.setX(getWidth() - textWidth - 4.f);
         r.setCentre(r.getCentreX(), y);
 
         g.setColour(gDb == 0.f ? Colour(0u, 172u, 1u) : Colours::lightgrey);
@@ -519,7 +519,7 @@ void ResponseCurveComponent::resized()
 
         str << (gDb - 24.f);
 
-        r.setX(1);
+        r.setX(4);
         textWidth = g.getCurrentFont().getStringWidth(str);
         r.setSize(textWidth, fontHeight);
         g.setColour(Colours::lightgrey);
@@ -534,8 +534,8 @@ juce::Rectangle<int> ResponseCurveComponent::getRenderArea()
     bounds.removeFromTop(12);
     bounds.removeFromBottom(2);
 
-    bounds.removeFromLeft(20);
-    bounds.removeFromRight(20);
+    bounds.removeFromLeft(24);
+    bounds.removeFromRight(24);
 
     return bounds;
 }
