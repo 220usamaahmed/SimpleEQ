@@ -197,6 +197,15 @@ bool SimpleEQAudioProcessor::hasEditor() const
 
 juce::AudioProcessorEditor* SimpleEQAudioProcessor::createEditor()
 {
+    if (wrapperType == wrapperType_Standalone)
+    {
+        if (juce::TopLevelWindow::getNumTopLevelWindows() == 1)
+        {
+            juce::TopLevelWindow* w = juce::TopLevelWindow::getTopLevelWindow(0);
+            w->setUsingNativeTitleBar(true);
+            
+        }
+    }
     return new SimpleEQAudioProcessorEditor (*this);
     // return new juce::GenericAudioProcessorEditor(*this);
 }
